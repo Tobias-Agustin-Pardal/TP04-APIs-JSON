@@ -1,0 +1,21 @@
+#portada{
+    width: 500px;
+    height: 800px;
+    background-image: url();
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: blur(8px);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    
+}
+
+.contenedorPortada{
+    width: fit-content;
+    height: fit-content;
+    z-index: 0;
+    background-image: url(../IMG/pixel.jpg);
+    background-size: cover;
+    box-sizing:border-box;
+    
+}
