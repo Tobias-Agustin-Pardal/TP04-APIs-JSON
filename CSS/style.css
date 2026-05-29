@@ -9,13 +9,3 @@
     image-rendering: crisp-edges;
     
 }
-
-.contenedorPortada{
-    width: fit-content;
-    height: fit-content;
-    z-index: 0;
-    background-image: url(../IMG/pixel.jpg);
-    background-size: cover;
-    box-sizing:border-box;
-    
-}
