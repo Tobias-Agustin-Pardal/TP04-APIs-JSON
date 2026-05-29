@@ -1,22 +1,16 @@
 const portada= document.getElementById("portada")
 let peliculaData = [];
 let posicionElegida = "";
-const listaPeliculas = [
-  "Batman",
-  "Better Call Saul",
-  "Hellraiser",
-  "Inception",
+import { listaPeliculas } from './array.js';
 
-];
-
-//Hay poner el fetch en una funcion que se llame cuando se inicie la pagina y cuando pase a la siguiente pelicula
-fetch (`https://www.omdbapi.com/?apikey=a22fb87a&t=${elegirPelicula()}`)
+function fetchPelicula (){
+  fetch (`https://www.omdbapi.com/?apikey=a22fb87a&t=${elegirPelicula()}`)
     .then(response => response.json())
     .then(data => {
         peliculaData = data;
         mostrarPortada(peliculaData);
     });
-
+}
 
 function mostrarPortada(info){
     portada.style.backgroundImage=`url(${info.Poster})`;
@@ -35,3 +29,5 @@ function elegirPelicula(){
   eliminarPeliculaPorPosicion(listaPeliculas, listaPeliculas.indexOf(posicionElegida));
   return posicionElegida;
 }
+
+document.addEventListener("DOMContentLoaded", fetchPelicula());
