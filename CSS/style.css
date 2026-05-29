@@ -3,9 +3,27 @@
     height: 800px;
     background-image: url();
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     filter: blur(8px);
     image-rendering: pixelated;
     image-rendering: crisp-edges;
-    
+}
+
+.contenedorPortada{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pixel{
+    position: absolute;
+    width: 500px;
+    height: 800px;
+    background-image: url(../IMG/pixel.jpg);
+    background-size: contain;
+    background-repeat:repeat-y;
+    opacity: 0.5;
+    image-rendering: pixelated;
 }
