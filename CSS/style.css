@@ -1,12 +1,15 @@
 #portada{
-    width: 500px;
-    height: 800px;
+    width: 300px;
+    height: 500px;
     background-image: url();
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(8px);
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contenedorPortada{
@@ -19,15 +22,24 @@
 
 .pixel{
     position: absolute;
-    width: 500px;
-    height: 800px;
+    width: 300px;
+    height: 500px;
     background-image: url(../IMG/pixel.jpg);
     background-size: contain;
     background-repeat:repeat-y;
     opacity: 0.5;
     image-rendering: pixelated;
 }
+.Pistas{
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    padding: 25px;
+    margin:25px;
+}
 .Pista{
     background-color: #ff7745;
+    width: 25vw;
+    height: 5vh;
     
 }
