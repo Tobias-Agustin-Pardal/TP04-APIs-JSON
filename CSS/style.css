@@ -1,3 +1,22 @@
+nav{
+    background-color: #050401;
+    padding: 10px;
+    
+}
+nav ul{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+}
+#Logo{
+    height: 15vh;
+}
+#Nombre{
+    color: white;
+    font-size: 2.5em;
+    font-family: 'Arial', sans-serif;
+}
 #portada{
     width: 300px;
     height: 500px;
@@ -18,6 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .pixel{
@@ -38,8 +58,11 @@
     margin:25px;
 }
 .Pista{
+    align-items: center;
+    display: flex;
+    justify-content: center;
     background-color: #ff7745;
     width: 25vw;
     height: 5vh;
-    
+    border-radius: 25px;
 }
