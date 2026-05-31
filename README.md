@@ -2,7 +2,19 @@
 Trabajo Integrador mitad de año
 
 Proximos pasos:
-  Hay que hacer el timer
-  Hay que crear un boton para pasar a la siguiente pelicula, este tiene q aparecer cuando termine el timer
-  Hay que hacer el codigo js para los botones ..
-  Hacer el sistema de puntuacion
+  ✅ Llamado a API para traer portada de pelicula random
+    ʟ ✅ Aleatorizar pelicula
+      ʟ ✅ Crear array de multiples opciones de peliculas
+        ʟ ❌ Pasar el array a un archivo aparte (opcional)
+    ʟ ✅ Funcion que elimina la portada que ya salio del array para evitar duplicados
+  ✅ Hay que hacer el timer
+    ʟ ✅ Crear funcion vinculada a un timeout
+    ʟ ❌ Vincular a cada ronda
+      ʟ ❌ Crear sistema de rondas
+        ʟ ❌ Crear sistema de puntaje x ronda
+        ʟ ❌ Crear boton que permita pasar a la siguiente ronda
+        ʟ ❌ Crear sistema de pistas segun la ronda
+        ʟ ❌ VINCULAR TODO LO ANTERIOR A CADA RONDA Y PELICULA RESPECTIVA
+
+Opcionales:
+❌ Hacer la pagina responsive
