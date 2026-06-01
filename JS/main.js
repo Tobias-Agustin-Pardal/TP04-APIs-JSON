@@ -1,8 +1,10 @@
+const portada = document.getElementById("portada");
+const timerBar = document.getElementById('temp'); // Lo declaramos de forma global para acceder fácil
+const inputPeli = document.getElementById("InputPeli");
+const btnPeli = document.getElementById("BtnPeli");
 
-const portada= document.getElementById("portada")
 let peliculaData = [];
-let posicionElegida = "";
-let duracion = '10000'
+let duracion = 10000; // Guardado como número
 
 const listaPeliculas = [
   "Batman",
@@ -68,8 +70,10 @@ const listaPeliculas = [
   "a silent place"
 ];
 
-function fetchPelicula (){
-  fetch (`https://www.omdbapi.com/?apikey=a22fb87a&t=${elegirPelicula()}`)
+function fetchPelicula() {
+  const peliElegida = elegirPelicula();
+
+  fetch(`https://www.omdbapi.com/?apikey=a22fb87a&t=${peliElegida}`)
     .then(response => response.json())
     .then(data => {
         peliculaData = data;
@@ -77,37 +81,66 @@ function fetchPelicula (){
     });
 }
 
-function mostrarPortada(info){
-    portada.style.backgroundImage=`url(${info.Poster})`;
-    listaPeliculas
+function mostrarPortada(info) {
+    portada.style.backgroundImage = `url(${info.Poster})`;
 }
 
-function eliminarPeliculaPorPosicion(lista, posicion) {
-  lista.splice(posicion, 1); 
-  return lista;
-}
+function elegirPelicula() {
+  if (listaPeliculas.length === 0) return null;
+  
+  const indiceAleatorio = Math.floor(Math.random() * listaPeliculas.length);
+  const posicionElegida = listaPeliculas[indiceAleatorio];
 
-console.log(listaPeliculas);
-
-function elegirPelicula(){
-  const posicionElegida = listaPeliculas[Math.floor(Math.random() * listaPeliculas.length)];
-  eliminarPeliculaPorPosicion(listaPeliculas, listaPeliculas.indexOf(posicionElegida));
+  listaPeliculas.splice(indiceAleatorio, 1); 
   return posicionElegida;
 }
 
+let timerTimeout;
 
 function iniciarTimer() {
-  const timerBar=document.getElementById('temp')
 
-  setTimeout(() => {
-  timerBar.style.animation = 'crecer '+duracion+'ms linear forwards';
-  setTimeout(() => timerBar.remove(), duracion );
-    }, 1);
+  timerBar.style.animation = 'none';
+  timerBar.offsetHeight;
+  timerBar.style.animation = `crecer ${duracion}ms linear forwards`;
   
-  tiempoAgotado()
+  clearTimeout(timerTimeout);
+
+  timerTimeout = setTimeout(() => {
+    tiempoAgotado();
+  }, duracion);
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-  fetchPelicula() //funcion para llamar a la api
-  iniciarTimer() //Funcion para inciiar el timer
-})
+function tiempoAgotado() {
+  siguientePelicula();
+}
+
+function siguientePelicula() {
+  inputPeli.value = "";
+  fetchPelicula();
+  iniciarTimer();
+}
+
+function verificarRespuesta() {
+  const respuestaUsuario = inputPeli.value.trim().toLowerCase();
+  const respuestaCorrecta = peliculaData.Title.toLowerCase();
+
+  // if (respuestaUsuario === respuestaCorrecta) {
+  //   alert("¡Correcto! Excelente.");
+  //   clearTimeout(timerTimeout);
+  //   siguientePelicula();
+  // } else {
+  //   alert("Respuesta incorrecta. ¡Sigue intentando!");
+  // }
+}
+
+btnPeli.addEventListener("click", verificarRespuesta);
+
+inputPeli.addEventListener("keypress", function(e) {
+  if (e.key === 'Enter') {
+    verificarRespuesta();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  siguientePelicula();
+});
