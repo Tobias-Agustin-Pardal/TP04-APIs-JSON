@@ -1,0 +1,150 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+nav{
+    background-color: #050401;
+    padding: 10px;
+}
+nav ul{
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+#logo{
+    height: 10vh;
+}
+#Nombre{
+    color: white;
+    font-size: 2.5em;
+    font-family: 'Arial', sans-serif;
+}
+
+
+#portada{
+    width: 270px;
+    height: 470px;
+    background-image: url();
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(8px);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contSup{
+    width: 100vw;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.pixel{
+    position: absolute;
+    width: 270px;
+    height: 470px;
+    background-image: url(../IMG/pixel.jpg);
+    background-size: contain;
+    background-repeat:repeat-y;
+    opacity: 0.5;
+    image-rendering: pixelated;
+}
+.Pistas{
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    padding: 25px;
+    margin:25px;
+}
+.Pista{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: #ff7745;
+    width: 25vw;
+    height: 5vh;
+    border-radius: 10px;
+}
+
+#temp{
+    transform-origin: left;
+    width: 30vw;
+    height: 1.5vh;
+    background-color: #050401;
+    transform: scaleX(0);
+}
+
+
+.contInf{
+    display: flex;
+    flex-direction: column;
+    align-items:center ;
+    justify-content:space-around ;
+    width: 100vw;
+    height: 10vh;
+}
+
+@keyframes crecer{
+    to{
+        transform: scaleX(1);
+    }
+}
+
+#animScreen{
+    visibility: collapse;
+    width: 100vw;
+    height: 90vh;
+    background-color: #ff7745;
+    z-index: 1000;
+    position: fixed
+}
+#logoAnim {
+    position: fixed;
+    top: 50%;
+    left: 0%;
+    transform: translate(-100%, -50%) scale(0.1) rotate(0deg);
+}
+
+#logoAnim.entrada-logoAnim {
+    animation: entradaFondo 1.8s ease-out forwards;
+}
+
+#logoAnim.salida-logoAnim {
+    animation: salidaFondo 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+}
+
+@keyframes entradaFondo {
+  0% {
+    left: 0%;
+    transform: translate(-100%, -50%) scale(0.1) rotate(0deg);
+  }
+  40% {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5) rotate(180deg);
+  }
+  100% {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5) rotate(720deg);
+  }
+}
+
+@keyframes salidaFondo {
+  0% {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5) rotate(720deg);
+    opacity: 1;
+  }
+  100% {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0) rotate(1440deg);
+    opacity: 0;
+  }
+}
