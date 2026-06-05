@@ -8,7 +8,6 @@
 nav{
     background-color: #050401;
     padding: 10px;
-    
 }
 nav ul{
     display: flex;
@@ -97,4 +96,16 @@ nav ul{
     to{
         transform: scaleX(1);
     }
+}
+
+#animScreen{
+    width: 100vw;
+    height: 90vh;
+    background-color: #ff7745;
+    z-index: 1000;
+    position: fixed
+}
+
+@keyframes popcorn{
+    0%{transform: translateX(0); transform: translateY(0);}
 }
