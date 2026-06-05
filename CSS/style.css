@@ -109,3 +109,15 @@ nav ul{
 @keyframes popcorn{
     0%{transform: translateX(0); transform: translateY(0);}
 }
+
+#btnsiguiente{
+    margin: 50px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: #ff7745;
+    width: 10vw;
+    height: 5vh;
+    border-radius: 10px;
+    border: none;
+}
