@@ -11,6 +11,8 @@ let score = 0;
 let peliculaData = [];
 let duracion = 20000;
 
+let ronda = 0;
+
 const listaPeliculas = [
   "Batman",
   "Better Call Saul",
@@ -120,6 +122,7 @@ function siguientePelicula() {
   inputPeli.value = "";
   fetchPelicula();
   iniciarTimer();
+  incrementarronda();
 }
 
 function verificarRespuesta() {
@@ -149,3 +152,12 @@ inputPeli.addEventListener("keypress", function(e) {
 document.addEventListener("DOMContentLoaded", function() {
   siguientePelicula();
 });
+
+function incrementarronda(){
+  ronda++;
+  actualizarCantRondas()
+}
+
+function actualizarCantRondas(){
+  document.getElementById("contador").innerHTML= ronda;
+}
