@@ -15,6 +15,8 @@ Proximos pasos:
         ʟ ❌ Crear boton que permita pasar a la siguiente ronda
         ʟ ❌ Crear sistema de pistas segun la ronda
         ʟ ❌ VINCULAR TODO LO ANTERIOR A CADA RONDA Y PELICULA RESPECTIVA
-
+  ❌ Crear opción para salir del juego
+    ʟ Crear pestaña de lobby
+    
 Opcionales:
 ❌ Hacer la pagina responsive
