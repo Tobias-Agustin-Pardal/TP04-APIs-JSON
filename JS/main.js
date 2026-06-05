@@ -3,6 +3,7 @@ const timerBar = document.getElementById('temp');
 const inputPeli = document.getElementById("InputPeli");
 const btnPeli = document.getElementById("BtnPeli");
 const salida = document.getElementById("Exit"); //declaracion global
+const siguiente = document.getElementById("btnsiguiente");
 
 const discore = document.getElementById("score"); 
 let score = 0;
