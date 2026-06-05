@@ -110,6 +110,12 @@ nav ul{
     0%{transform: translateX(0); transform: translateY(0);}
 }
 
+#Contador-SalirPartida{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 50px;
+}
 #btnsiguiente{
     margin: 50px;
     align-items: center;
