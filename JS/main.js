@@ -1,10 +1,14 @@
 const portada = document.getElementById("portada");
-const timerBar = document.getElementById('temp'); // Lo declaramos de forma global para acceder fácil
+const timerBar = document.getElementById('temp');
 const inputPeli = document.getElementById("InputPeli");
 const btnPeli = document.getElementById("BtnPeli");
+const salida = document.getElementById("Exit"); //declaracion global
+
+const discore = document.getElementById("score"); 
+let score = 0;
 
 let peliculaData = [];
-let duracion = 10000; // Guardado como número
+let duracion = 20000;
 
 const listaPeliculas = [
   "Batman",
@@ -21,9 +25,7 @@ const listaPeliculas = [
   "Fight Club",
   "The Dark Knight",
   "Forrest Gump",
-  "The Shawshank Redemption",
   "Joker",
-  "The Silence of the Lambs",
   "Se7en",
   "Whiplash",
   "The Prestige",
@@ -33,7 +35,7 @@ const listaPeliculas = [
   "Alien",
   "Aliens",
   "Predator",
-  "Terminator 2: Judgment Day",
+  "Terminator 2",
   "Back to the Future",
   "Jurassic Park",
   "The Lion King",
@@ -55,7 +57,6 @@ const listaPeliculas = [
   "It",
   "Scream",
   "Halloween",
-  "A Nightmare on Elm Street",
   "The Exorcist",
   "Saw",
   "Blade Runner",
@@ -124,13 +125,16 @@ function verificarRespuesta() {
   const respuestaUsuario = inputPeli.value.trim().toLowerCase();
   const respuestaCorrecta = peliculaData.Title.toLowerCase();
 
-  // if (respuestaUsuario === respuestaCorrecta) {
-  //   alert("¡Correcto! Excelente.");
-  //   clearTimeout(timerTimeout);
-  //   siguientePelicula();
-  // } else {
-  //   alert("Respuesta incorrecta. ¡Sigue intentando!");
-  // }
+  if (respuestaUsuario === respuestaCorrecta) {
+
+    score++;
+    discore.textContent = score;
+
+    clearTimeout(timerTimeout);
+    siguientePelicula();
+  } else {
+    alert("Respuesta incorrecta. ¡Sigue intentando!");
+  }
 }
 
 btnPeli.addEventListener("click", verificarRespuesta);
