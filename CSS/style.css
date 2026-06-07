@@ -99,12 +99,56 @@ nav ul{
 }
 
 #animScreen{
+    visibility: collapse;
     width: 100vw;
     height: 90vh;
     background-color: #ff7745;
     z-index: 1000;
     position: fixed
 }
+#logoAnim {
+    position: fixed;
+    top: 50%;
+    left: 0%;
+    transform: translate(-100%, -50%) scale(0.1) rotate(0deg);
+}
+
+#logoAnim.entrada-logoAnim {
+    animation: entradaFondo 1.8s ease-out forwards;
+}
+
+#logoAnim.salida-logoAnim {
+    animation: salidaFondo 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+}
+
+@keyframes entradaFondo {
+  0% {
+    left: 0%;
+    transform: translate(-100%, -50%) scale(0.1) rotate(0deg);
+  }
+  40% {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5) rotate(180deg);
+  }
+  100% {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5) rotate(720deg);
+  }
+}
+
+@keyframes salidaFondo {
+  0% {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5) rotate(720deg);
+    opacity: 1;
+  }
+  100% {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0) rotate(1440deg);
+    opacity: 0;
+  }
+}
+
 
 @keyframes popcorn{
     0%{transform: translateX(0); transform: translateY(0);}
