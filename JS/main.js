@@ -8,6 +8,9 @@ const siguiente = document.getElementById("btnsiguiente");
 const discore = document.getElementById("score"); 
 let score = 0;
 
+const popCorn = document.getElementById("logoAnim")
+const animScreen= document.getElementById("animScreen")
+
 let peliculaData = [];
 let duracion = 20000;
 
@@ -119,6 +122,10 @@ function tiempoAgotado() {
 }
 
 function siguientePelicula() {
+  popCorn.classList.remove('salida-logoAnim'); 
+  animScreen.style.visibility="visible"
+  popCorn.classList.add('entrada-logoAnim')
+  animacionCompl() 
   inputPeli.value = "";
   fetchPelicula();
   iniciarTimer();
@@ -129,16 +136,13 @@ function verificarRespuesta() {
   const respuestaUsuario = inputPeli.value.trim().toLowerCase();
   const respuestaCorrecta = peliculaData.Title.toLowerCase();
 
-  if (respuestaUsuario === respuestaCorrecta) {
-
-    score++;
-    discore.textContent = score;
-
-    clearTimeout(timerTimeout);
-    siguientePelicula();
-  } else {
-    alert("Respuesta incorrecta. ¡Sigue intentando!");
-  }
+  // if (respuestaUsuario === respuestaCorrecta) {
+  //   alert("¡Correcto! Excelente.");
+  //   clearTimeout(timerTimeout);
+  //   siguientePelicula();
+  // } else {
+  //   alert("Respuesta incorrecta. ¡Sigue intentando!");
+  // }
 }
 
 btnPeli.addEventListener("click", verificarRespuesta);
