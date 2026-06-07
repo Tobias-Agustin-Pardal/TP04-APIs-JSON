@@ -165,3 +165,12 @@ function incrementarronda(){
 function actualizarCantRondas(){
   document.getElementById("contador").innerHTML= ronda;
 }
+
+
+function animacionCompl() {
+  setTimeout(() => {
+    popCorn.classList.remove('entrada-logoAnim'); 
+    popCorn.classList.add('salida-logoAnim'); 
+    animScreen.style.visibility="collapse"
+  }, 3000);
+}
