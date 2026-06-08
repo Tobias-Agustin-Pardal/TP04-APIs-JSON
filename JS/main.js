@@ -12,9 +12,10 @@ const popCorn = document.getElementById("logoAnim")
 const animScreen= document.getElementById("animScreen")
 
 let peliculaData = [];
-let duracion = 20000;
+let duracion = 6000;
 
 let ronda = 0;
+let errorCout =0;
 
 const listaPeliculas = [
   "Batman",
@@ -121,15 +122,12 @@ function tiempoAgotado() {
   siguientePelicula();
 }
 
-function siguientePelicula() {
-  popCorn.classList.remove('salida-logoAnim'); 
-  animScreen.style.visibility="visible"
-  popCorn.classList.add('entrada-logoAnim')
-  animacionCompl() 
+async function siguientePelicula() {
+  await animTransicion();
+  await animacionCompl();
   inputPeli.value = "";
-  fetchPelicula();
+  //fetchPelicula();
   iniciarTimer();
-  incrementarronda();
 }
 
 function verificarRespuesta() {
@@ -157,20 +155,30 @@ document.addEventListener("DOMContentLoaded", function() {
   siguientePelicula();
 });
 
-function incrementarronda(){
-  ronda++;
-  actualizarCantRondas()
+
+function esperarAnimacion(elemento) {
+  return new Promise(resolve => {
+    elemento.addEventListener("animationend", resolve, { once: true });
+  });
 }
 
-function actualizarCantRondas(){
-  document.getElementById("contador").innerHTML= ronda;
+async function animTransicion() {
+  popCorn.classList.remove('salida-logoAnim');
+  animScreen.classList.remove("salida-fondo")
+  popCorn.src="../img/popframe.gif"
+  animScreen.style.visibility = "visible";
+  animScreen.classList.add("entrada-fondo")
+  popCorn.classList.add('entrada-logoAnim');
+  await esperarAnimacion(popCorn);
 }
 
-
-function animacionCompl() {
-  setTimeout(() => {
-    popCorn.classList.remove('entrada-logoAnim'); 
-    popCorn.classList.add('salida-logoAnim'); 
-    animScreen.style.visibility="collapse"
-  }, 3000);
+async function animacionCompl() {
+  
+  popCorn.src="../img/1f37f-test reverse.gif?v=0";
+  popCorn.classList.remove('entrada-logoAnim'); 
+  animScreen.classList.remove("entrada-fondo")
+  popCorn.classList.add('salida-logoAnim'); 
+  await esperarAnimacion(popCorn);
+  animScreen.classList.add("salida-fondo")
 }
+  
