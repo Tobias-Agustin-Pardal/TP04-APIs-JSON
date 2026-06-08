@@ -30,11 +30,21 @@ main div{
     font-size:5vh;
     font-weight: bold;
 }
+#Hola{
+    display: flex;
+    flex-direction: row;
+}
 .TextoPuntaje{
     color:white;
     font-family: 'Open Sans', sans-serif;
     font-size: 8vh;
     font-weight: bold;
+}
+#Resultado{
+    color:white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 8vh;
+    font-weight: lighter;
 }
 .Botones{
     height: 125px;
