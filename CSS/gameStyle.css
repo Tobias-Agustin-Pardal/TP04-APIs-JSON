@@ -64,9 +64,9 @@ body {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-}
+    justify-content: center;
 
-cont
+}
 
 
 #temp{
@@ -81,9 +81,10 @@ cont
 
 .contTemp{
     background-color: var(--color5);
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 3vh;
     border: solid 1vh var(--color5);
+    grid-area: 4 / 1 / 5 / 2;
 }
 
 .contInf{
