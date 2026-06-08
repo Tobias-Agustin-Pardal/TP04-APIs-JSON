@@ -3,16 +3,17 @@ const timerBar = document.getElementById('temp');
 const inputPeli = document.getElementById("InputPeli");
 const btnPeli = document.getElementById("BtnPeli");
 const salida = document.getElementById("Exit"); //declaracion global
-const siguiente = document.getElementById("btnsiguiente");
 
 const discore = document.getElementById("score"); 
 let score = 0;
 
 const popCorn = document.getElementById("logoAnim")
 const animScreen= document.getElementById("animScreen")
+const btnSkip= document.querySelector(".btnSkip")
 
 let peliculaData = [];
 let duracion = 6000;
+const apikey = "3020f1e3";
 
 let ronda = 0;
 let errorCout =0;
@@ -81,7 +82,7 @@ const listaPeliculas = [
 function fetchPelicula() {
   const peliElegida = elegirPelicula();
 
-  fetch(`https://www.omdbapi.com/?apikey=a22fb87a&t=${peliElegida}`)
+  fetch(`https://www.omdbapi.com/?apikey=${apikey}&t=${peliElegida}`)
     .then(response => response.json())
     .then(data => {
         peliculaData = data;
@@ -112,35 +113,31 @@ function iniciarTimer() {
   timerBar.style.animation = `crecer ${duracion}ms linear forwards`;
   
   clearTimeout(timerTimeout);
-
   timerTimeout = setTimeout(() => {
     tiempoAgotado();
+    
   }, duracion);
 }
 
 function tiempoAgotado() {
+  
   siguientePelicula();
 }
 
 async function siguientePelicula() {
+  await esperarSkip(btnSkip);
   await animTransicion();
+  await esperarSkip(btnSkip);
   await animacionCompl();
   inputPeli.value = "";
-  //fetchPelicula();
+  fetchPelicula();
   iniciarTimer();
+  
 }
 
 function verificarRespuesta() {
   const respuestaUsuario = inputPeli.value.trim().toLowerCase();
   const respuestaCorrecta = peliculaData.Title.toLowerCase();
-
-  // if (respuestaUsuario === respuestaCorrecta) {
-  //   alert("¡Correcto! Excelente.");
-  //   clearTimeout(timerTimeout);
-  //   siguientePelicula();
-  // } else {
-  //   alert("Respuesta incorrecta. ¡Sigue intentando!");
-  // }
 }
 
 btnPeli.addEventListener("click", verificarRespuesta);
@@ -161,6 +158,13 @@ function esperarAnimacion(elemento) {
     elemento.addEventListener("animationend", resolve, { once: true });
   });
 }
+
+function esperarSkip(btn) {
+  return new Promise(resolve => {
+    btn.addEventListener("click", resolve, { once: true });
+  });
+}
+
 
 async function animTransicion() {
   popCorn.classList.remove('salida-logoAnim');
