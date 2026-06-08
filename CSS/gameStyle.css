@@ -53,21 +53,42 @@ body {
     
 }
 .contSup > .left{
+    padding: 0 0 0 20%;
     width:50%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 .contSup > .right{
+    padding: 0 20% 0 0;
     width:50%;
-    height: 100%;
+    height: 60vh;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     justify-content: center;
+    align-items: end;
 
 }
 
+.pista1 {
+    grid-area: 1 / 1 / 2 / 2; 
+    height: 10vh;
+    width: auto;
+
+}
+
+.pista2 {
+    grid-area: 2 / 1 / 3 / 2;
+    height: 10vh;
+    width: auto;
+}
+.pista3 {
+    grid-area: 3 / 1 / 4 / 2;
+    height: 10vh;
+    width: auto;
+}
 
 #temp{
     transform-origin: left;
