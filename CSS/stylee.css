@@ -1,0 +1,49 @@
+*{
+    background-image: url(../IMG/Texto\ del\ párrafo.jpg);
+}
+nav{
+    background-color: white;
+    height: 10vh;
+}
+#BloqueRojoNav{
+    background-color: #ef3920;
+    height: 8vh;
+    display: flex;
+    grid-row:auto;
+
+}
+#ContenedorPalomitas{
+    background-color: white;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 50%;
+}
+#ContenedorTitulo{
+    background-color: white;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 25%;
+}
+#Degrade{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+main{
+    justify-content: center;
+    padding: 100vw 50vw 100vw 50vw;
+}
+#Pop{
+    color: #ffb640;
+}
+#Culture{
+    color: #ef3920;
+}
+#JUGAR{
+    background-color: #ffb640;
+    color: white;
+}
+footer{
+    background-color: white;
+    display: flex;
+}
