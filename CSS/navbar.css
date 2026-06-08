@@ -1,4 +1,14 @@
 
+:root{
+    --color1:#ef3920;
+    --color2:#ff9e00;
+    --color3:#ffb640;
+    --color4:#fbecc4;
+    --color5:#FFFFFF;
+    --color6:#0a0a0a;
+
+}
+
 nav {
     z-index: 0;
     width: 100vw;
@@ -7,11 +17,10 @@ nav {
 }
 
 .contenedorGen-nav{
-    width: 100%;
+    width: auto;
     height: auto;
     display: flex;
     flex-direction: row;
-    gap: -10px;
     align-items: center;
     justify-content: start;
 }
@@ -21,13 +30,39 @@ nav {
     width: fit-content;
     height: fit-content;
     border-radius: 50%;
-    background-color: aliceblue;
+    background-color: var(--color5);
     padding: 0.5vh;
 } 
 
+.color1 > .circle2 {
+    z-index: 2;
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50%;
+    background-color: var(--color5);
+    padding: 0.5vh;
+    transition: 0.3s linear;
+}
+
+.btnSkip{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.btnSkip > span{
+    font-size: 4vh;
+    color: var(--color1);
+}
+
+.color1 > .circle2:hover{
+    transform: scale(1.1);
+}
+
+
 .contenedorGen-nav > .title-cont{
     align-items: center;
-    background-color: aliceblue;
+    background-color: var(--color5);
     height: 50%;
     font-size: 4vh;
     padding:  1vh 5vw ;
@@ -36,12 +71,12 @@ nav {
     z-index: 1;
     border-radius: 25px;
     font-family: 'Open Sans', sans-serif;
-    color:#ef3920;
+    color:var(--color1);
     font-weight: bold;
 }
 
 .contenedorGen-nav > .title-cont > span{
-    color: #ffb640;
+    color: var(--color2);
 }
 
 .circle > img{
@@ -50,7 +85,7 @@ nav {
     box-sizing: content-box;
 }
 
-.color1{background-color: #ef3920;width: 50%;height: 100%; display: flex; justify-content: start; align-items: center; box-sizing: content-box;}
-.color2{background-color: #ff9e00;width: 25%;height: 100%;}
-.color3{background-color: #ffb640;width: 20%;height: 100%;}
-.color4{background-color: #fbecc4;width: 5%;height: 100%;}
+.color1{background-color: var(--color1);width: 50%;height: 100%; display: flex; align-items: center; box-sizing: content-box; gap: 0; justify-content: start;}
+.color2{background-color: var(--color2);width: 25%;height: 100%;}
+.color3{background-color: var(--color3);width: 20%;height: 100%;}
+.color4{background-color: var(--color4);width: 5%;height: 100%;}
