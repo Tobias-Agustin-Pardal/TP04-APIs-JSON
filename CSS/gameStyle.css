@@ -69,25 +69,34 @@ body {
     grid-template-rows: 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: end;
+    box-sizing: content-box;
 
+}
+
+.contPista{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.tiempo{align-items: end;}
+.pista{
+    height: 10vh;
+    width: auto;
 }
 
 .pista1 {
     grid-area: 1 / 1 / 2 / 2; 
-    height: 10vh;
-    width: auto;
 
 }
-
 .pista2 {
     grid-area: 2 / 1 / 3 / 2;
-    height: 10vh;
-    width: auto;
+
 }
 .pista3 {
     grid-area: 3 / 1 / 4 / 2;
-    height: 10vh;
-    width: auto;
+
 }
 
 #temp{
@@ -221,3 +230,5 @@ body {
     border-radius: 10px;
     border: none;
 }
+
+
