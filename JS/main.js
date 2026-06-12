@@ -99,7 +99,7 @@ function crearPistas (pista){
   }, duracion * 0.60);
 
   pista3Timeout = setTimeout(() => {
-    desc.textContent = tempDesc;
+    desc.textContent = traducirDesc(peliElegida,descripciones);
     cambiarReloj();
     mostrarSkip()
     score=score - 35
@@ -115,6 +115,13 @@ function mostrarSkip (){
     
   })
 
+}
+
+//-------------- TRADUCCIONES ---------------
+
+function traducirDesc(nombrePelicula, diccionarioPelis) {
+  let clave = nombrePelicula;
+  return diccionarioPelis[clave] || "Película no encontrada en el diccionario.";
 }
 
 function traducirTipo(pista){
@@ -145,6 +152,9 @@ function traducirGenero(pista){
   
   return resultado;
 }
+
+//-------------- TRADUCCIONES ---------------
+
 
 function tiempoAgotado() {
   siguientePelicula();
