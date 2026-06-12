@@ -3,6 +3,7 @@ const timerBar = document.getElementById('temp');
 const inputPeli = document.getElementById("InputPeli");
 const btnPeli = document.getElementById("BtnPeli");
 const salida = document.getElementById("Exit");
+const imgReloj = document.getElementById("Reloj");
 
 const genre = document.getElementById("genere");
 const type = document.getElementById("type");
@@ -156,6 +157,7 @@ function crearPistas (pista){
 
   pista3Timeout = setTimeout(() => {
     desc.textContent = tempDesc;
+    cambiarReloj();
   }, duracion * 0.80);
 }
 
@@ -320,4 +322,8 @@ async function animacionCompl() {
   popCorn.classList.add('salida-logoAnim'); 
   await esperarAnimacion(popCorn);
   animScreen.classList.add("salida-fondo")
+}
+
+function cambiarReloj(){
+  imgReloj.src="../IMG/RelojExclamacion.png";
 }
