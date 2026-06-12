@@ -245,7 +245,7 @@ body {
     align-items: center;
     gap: 2vw;
 }
-#Reloj{
+#reloj{
     margin: 0 auto;
     height: 10vh;
     animation: animReloj 1.2s infinite ease-in-out;
@@ -275,4 +275,25 @@ body {
     border-style: none;
     border-radius: 10px;
     padding: 6%;
+}
+
+@keyframes clock-shake {
+  0%   { transform: translate(0, 0)     rotate(0deg); }
+  20%  { transform: translate(-2px, 1px) rotate(-6deg); }
+  40%  { transform: translate(1px, -1px) rotate(4deg); }
+  60%  { transform: translate(-1px, -1px) rotate(-4deg); }
+  80%  { transform: translate(2px, 1px)  rotate(6deg); }
+  100% { transform: translate(0, 0)     rotate(0deg); }
+}
+
+.puntos{
+    
+    position: absolute;
+    top: 15vh;
+    right: 15vh;
+    font-size: 3rem;
+    color: var(--color4);
+    background-color: var(--color1);
+    padding: 1vh;
+    border-radius: 16px;
 }
