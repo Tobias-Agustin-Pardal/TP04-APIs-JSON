@@ -3,7 +3,6 @@ const timerBar = document.getElementById('temp');
 const inputPeli = document.getElementById("InputPeli");
 const btnPeli = document.getElementById("BtnPeli");
 const salida = document.getElementById("Exit");
-const imgReloj = document.getElementById("Reloj");
 
 const genre = document.getElementById("genere");
 const type = document.getElementById("type");
@@ -24,81 +23,6 @@ const apikey = "3020f1e3";
 
 let ronda = 0;
 let errorCout =0;
-
-const listaPeliculas = [
-  "Batman",
-  "Better Call Saul",
-  "Hellraiser",
-  "Inception",
-  "The Matrix",
-  "Interstellar",
-  "Gladiator",
-  "Titanic",
-  "Avatar",
-  "Dark",
-  "The Godfather",
-  "Pulp Fiction",
-  "Fight Club",
-  "Bleach",
-  "The Dark Knight",
-  "Forrest Gump",
-  "Joker",
-  "Chernobyl",
-  "Se7en",
-  "Whiplash",
-  "Dragon Ball Z",
-  "The Prestige",
-  "Django Unchained",
-  "Naruto",
-  "The Departed",
-  "Erased",
-  "Parasite",
-  "Squid Game",
-  "Alien",
-  "Aliens",
-  "Predator",
-  "Terminator 2",
-  "Ben 10",
-  "Back to the Future",
-  "Jurassic Park",
-  "The Lion King",
-  "Toy Story",
-  "Stranger Things",
-  "Finding Nemo",
-  "Shrek",
-  "Mad Max: Fury Road",
-  "John Wick",
-  "The Avengers",
-  "Iron Man",
-  "Doctor Strange",
-  "Spider-Man",
-  "Re: Zero",
-  "Logan",
-  "Deadpool",
-  "Teletubbies",
-  "The Conjuring",
-  "Insidious",
-  "Hereditary",
-  "Steven Universe",
-  "Midsommar",
-  "It",
-  "Scream",
-  "Halloween",
-  "The Exorcist",
-  "Saw",
-  "Regular Show",
-  "Blade Runner",
-  "Blade Runner 2049",
-  "Arrival",
-  "The Green Mile",
-  "Cast Away",
-  "Goodfellas",
-  "Casino",
-  "Power Rangers",
-  "Scarface",
-  "Heat",
-  "a silent place"
-];
 
 function fetchPelicula() {
   const peliElegida = elegirPelicula();
@@ -152,81 +76,34 @@ function crearPistas (pista){
   }, duracion * 0.40);
 
   pista2Timeout = setTimeout(() => {
-    type.textContent = tempTipo;
+
+    type.textContent = traducirTipo(tempTipo);
   }, duracion * 0.60);
 
   pista3Timeout = setTimeout(() => {
+
     desc.textContent = tempDesc;
-    cambiarReloj();
   }, duracion * 0.80);
 }
 
-function traducirGenero(pista){
+function traducirTipo(pista){
   const diccionario = {
-    "action": "Acción",
-    "romance": "Romance",
-    "terror": "Terror",
-    "horror": "Horror",
-    "suspense": "Suspenso",
-    "drama": "Drama",
-    "thriller": "Thriller",
-    "comedy": "Comedia",
-    "adventure": "Aventura",
-    "animation": "Animación",
-    "fantasy": "Fantasía",
-    "science_fiction": "Ciencia ficción",
-    "sci_fi": "Ciencia ficción",
-    "mystery": "Misterio",
-    "crime": "Crimen",
-    "detective": "Detectives",
-    "war": "Bélico",
-    "western": "Western",
-    "historical": "Histórico",
-    "biography": "Biografía",
-    "documentary": "Documental",
-    "family": "Familiar",
-    "musical": "Musical",
-    "music": "Música",
-    "sport": "Deportes",
-    "superhero": "Superhéroes",
-    "supernatural": "Sobrenatural",
-    "psychological": "Psicológico",
-    "dystopian": "Distópico",
-    "post_apocalyptic": "Postapocalíptico",
-    "apocalyptic": "Apocalíptico",
-    "survival": "Supervivencia",
-    "martial_arts": "Artes marciales",
-    "spy": "Espionaje",
-    "political": "Político",
-    "legal": "Judicial",
-    "medical": "Médico",
-    "military": "Militar",
-    "noir": "Noir",
-    "coming_of_age": "Crecimiento personal",
-    "slice_of_life": "Costumbrista",
-    "parody": "Parodia",
-    "satire": "Sátira",
-    "black_comedy": "Comedia negra",
-    "dark_comedy": "Comedia oscura",
-    "romantic_comedy": "Comedia romántica",
-    "teen": "Juvenil",
-    "children": "Infantil",
-    "fairy_tale": "Cuento de hadas",
-    "mythology": "Mitología",
-    "urban_fantasy": "Fantasía urbana",
-    "epic": "Épico",
-    "disaster": "Desastres",
-    "monster": "Monstruos",
-    "zombie": "Zombies",
-    "vampire": "Vampiros",
-    "werewolf": "Hombres lobo",
-    "alien": "Extraterrestres",
-    "cyberpunk": "Cyberpunk",
-    "steampunk": "Steampunk",
-    "time_travel": "Viajes en el tiempo",
-    "space_opera": "Ópera espacial"
+    "movie": "Película",
+    "series": "Serie"
   };
 
+  let resultado = pista
+  .split(',')
+  .map(elemento => {
+    let palabra = elemento.trim().toLowerCase();
+    return diccionario[palabra] || palabra; 
+  })
+  .join(', ');
+  
+  return resultado;
+}
+
+function traducirGenero(pista){
   let resultado = pista
   .split(',')
   .map(elemento => {
@@ -322,8 +199,4 @@ async function animacionCompl() {
   popCorn.classList.add('salida-logoAnim'); 
   await esperarAnimacion(popCorn);
   animScreen.classList.add("salida-fondo")
-}
-
-function cambiarReloj(){
-  imgReloj.src="../IMG/RelojExclamacion.png";
 }
