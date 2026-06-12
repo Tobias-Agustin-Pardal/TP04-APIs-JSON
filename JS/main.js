@@ -22,8 +22,7 @@ const btnSkip= document.querySelector(".btnSkip")
 
 const resultado = document.getElementById("resultado")
 
-const peliElegida = elegirPelicula();
-
+let peliElegida;
 
 let peliculaData = [];
 let   duracion = 60000;
@@ -39,6 +38,7 @@ let pista3Timeout;
 
 
 function fetchPelicula() {
+  peliElegida = elegirPelicula();
   
   if (!peliElegida) {
     alert("No quedan más películas.");
@@ -72,6 +72,7 @@ function iniciarTimer() {
 
 
 function crearPistas (pista){
+  actPuntos(score)
   let tempGenero = pista.Genre;
   let tempTipo = pista.Type;
   let tempDesc = pista.Plot;
@@ -175,6 +176,7 @@ function elegirPelicula() {
 }
 
 async function siguientePelicula() {
+  
   inputPeli.value = "";
   actPuntosTotales()
   await animTransicion();
@@ -217,6 +219,7 @@ function mostrarPuntajeTotal(){
 
 document.addEventListener("DOMContentLoaded", function() {
   siguientePelicula();
+  
 });
 
 
