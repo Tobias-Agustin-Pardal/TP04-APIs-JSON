@@ -1,4 +1,4 @@
-export const listaPeliculas = [
+const listaPeliculas = [
   "Batman",
   "Better Call Saul",
   "Hellraiser",
@@ -61,3 +61,38 @@ export const listaPeliculas = [
   "Heat",
   "a silent place"
 ];
+
+const diccionario = {
+  "action": "Acción",
+  "romance": "Romance",
+  "terror": "Terror",
+  "horror": "Horror",
+  "suspense": "Suspenso",
+  "drama": "Drama",
+  "thriller": "Thriller",
+  "comedy": "Comedia",
+  "adventure": "Aventura",
+  "animation": "Animación",
+  "fantasy": "Fantasía",
+  "science_fiction": "Ciencia ficción",
+  "sci fi": "Ciencia ficción",
+  "mystery": "Misterio",
+  "crime": "Crimen",
+  "detective": "Detectives",
+  "war": "Bélico",
+  "western": "Western",
+  "historical": "Histórico",
+  "biography": "Biografía",
+  "documentary": "Documental",
+  "family": "Familiar",
+  "musical": "Musical",
+  "music": "Música",
+  "sport": "Deportes",
+  "superhero": "Superhéroes",
+  "supernatural": "Sobrenatural",
+  "psychological": "Psicológico",
+  "dystopian": "Distópico",
+  "post_apocalyptic": "Postapocalíptico",
+  "apocalyptic": "Apocalíptico",
+  "survival": "Supervivencia",
+};
