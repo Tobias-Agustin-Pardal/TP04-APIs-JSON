@@ -238,3 +238,20 @@ body {
     border-radius: 10px;
     border: none;
 }
+
+
+#contTiempo{
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+}
+#Reloj{
+    margin: 0 auto;
+    height: 10vh;
+    animation: animReloj 1.2s infinite ease-in-out;
+}
+@keyframes animReloj{
+    0% {transform: scale(1);}
+    50% {transform: scale(1.15);}
+    100% {transform: scale(1);}
+}
