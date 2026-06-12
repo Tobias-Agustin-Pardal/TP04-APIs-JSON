@@ -16,8 +16,10 @@ const animScreen= document.getElementById("animScreen")
 const btnSkip= document.querySelector(".btnSkip")
 
 let peliculaData = [];
-let duracion = 70000;
+let   duracion = 5000;
 const apikey = "3020f1e3";
+
+
 
 let ronda = 0;
 let errorCout =0;
@@ -108,34 +110,9 @@ function fetchPelicula() {
   fetch(`https://www.omdbapi.com/?apikey=${apikey}&t=${peliElegida}`)
     .then(response => response.json())
     .then(data => {
-
       peliculaData = data;
-
-      mostrarPortada(data);
-
-      genre.textContent = "";
-      type.textContent = "";
-      desc.textContent = "";
-
-      clearTimeout(pista1Timeout);
-      clearTimeout(pista2Timeout);
-      clearTimeout(pista3Timeout);
-
-      pista1Timeout = setTimeout(() => {
-        genre.textContent = data.Genre;
-      }, duracion / 4.50);
-
-      pista2Timeout = setTimeout(() => {
-        type.textContent = data.Type;
-      }, duracion / 2.50);
-
-      pista3Timeout = setTimeout(() => {
-        desc.textContent = data.Plot;
-      }, duracion * 0.85);
-
-    })
-    .catch(error => {
-      console.error("Error:", error);
+      mostrarPortada(peliculaData);
+      crearPistas(peliculaData);
     });
 }
 
@@ -154,10 +131,114 @@ function iniciarTimer() {
   }, duracion);
 }
 
+function crearPistas (pista){
+  
+  let tempGenero = pista.Genre;
+  let tempTipo = pista.Type;
+  let tempDesc = pista.Plot;
+
+  genre.textContent = "";
+  type.textContent = "";
+  desc.textContent = "";
+
+  clearTimeout(pista1Timeout);
+  clearTimeout(pista2Timeout);
+  clearTimeout(pista3Timeout);
+
+  pista1Timeout = setTimeout(() => {
+    
+    genre.textContent = traducirGenero(tempGenero);
+  }, duracion * 0.40);
+
+  pista2Timeout = setTimeout(() => {
+    type.textContent = tempTipo;
+  }, duracion * 0.60);
+
+  pista3Timeout = setTimeout(() => {
+    desc.textContent = tempDesc;
+  }, duracion * 0.80);
+}
+
+function traducirGenero(pista){
+  const diccionario = {
+    "action": "Acción",
+    "romance": "Romance",
+    "terror": "Terror",
+    "horror": "Horror",
+    "suspense": "Suspenso",
+    "drama": "Drama",
+    "thriller": "Thriller",
+    "comedy": "Comedia",
+    "adventure": "Aventura",
+    "animation": "Animación",
+    "fantasy": "Fantasía",
+    "science_fiction": "Ciencia ficción",
+    "sci_fi": "Ciencia ficción",
+    "mystery": "Misterio",
+    "crime": "Crimen",
+    "detective": "Detectives",
+    "war": "Bélico",
+    "western": "Western",
+    "historical": "Histórico",
+    "biography": "Biografía",
+    "documentary": "Documental",
+    "family": "Familiar",
+    "musical": "Musical",
+    "music": "Música",
+    "sport": "Deportes",
+    "superhero": "Superhéroes",
+    "supernatural": "Sobrenatural",
+    "psychological": "Psicológico",
+    "dystopian": "Distópico",
+    "post_apocalyptic": "Postapocalíptico",
+    "apocalyptic": "Apocalíptico",
+    "survival": "Supervivencia",
+    "martial_arts": "Artes marciales",
+    "spy": "Espionaje",
+    "political": "Político",
+    "legal": "Judicial",
+    "medical": "Médico",
+    "military": "Militar",
+    "noir": "Noir",
+    "coming_of_age": "Crecimiento personal",
+    "slice_of_life": "Costumbrista",
+    "parody": "Parodia",
+    "satire": "Sátira",
+    "black_comedy": "Comedia negra",
+    "dark_comedy": "Comedia oscura",
+    "romantic_comedy": "Comedia romántica",
+    "teen": "Juvenil",
+    "children": "Infantil",
+    "fairy_tale": "Cuento de hadas",
+    "mythology": "Mitología",
+    "urban_fantasy": "Fantasía urbana",
+    "epic": "Épico",
+    "disaster": "Desastres",
+    "monster": "Monstruos",
+    "zombie": "Zombies",
+    "vampire": "Vampiros",
+    "werewolf": "Hombres lobo",
+    "alien": "Extraterrestres",
+    "cyberpunk": "Cyberpunk",
+    "steampunk": "Steampunk",
+    "time_travel": "Viajes en el tiempo",
+    "space_opera": "Ópera espacial"
+  };
+
+  let resultado = pista
+  .split(',')
+  .map(elemento => {
+    let palabra = elemento.trim().toLowerCase();
+    return diccionario[palabra] || palabra; 
+  })
+  .join(', ');
+  
+  return resultado;
+}
+
 function tiempoAgotado() {
   siguientePelicula();
 }
-
 
 function mostrarPortada(info) {
     portada.style.backgroundImage = `url(${info.Poster})`;
@@ -184,12 +265,10 @@ async function siguientePelicula() {
   inputPeli.value = "";
 
   await animTransicion();
-
-  fetchPelicula();
-
-  iniciarTimer();
-
   await animacionCompl();
+  
+  fetchPelicula();
+  iniciarTimer();
 }
 
 function verificarRespuesta() {
