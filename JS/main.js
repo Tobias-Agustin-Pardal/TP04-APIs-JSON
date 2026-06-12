@@ -1,33 +1,45 @@
+
 const portada = document.getElementById("portada");
 const timerBar = document.getElementById('temp');
-const inputPeli = document.getElementById("InputPeli");
+const inputPeli = document.getElementById("inputPeli");
 const btnPeli = document.getElementById("BtnPeli");
 const salida = document.getElementById("Exit");
-const imgReloj = document.getElementById("Reloj");
+const imgReloj = document.getElementById("reloj");
+
+const contPuntos = document.querySelector(".puntos")
 
 const genre = document.getElementById("genere");
 const type = document.getElementById("type");
 const desc = document.getElementById("desc");
 
 const discore = document.getElementById("score"); 
-let score = 0;
+let score = 100;
+let totalScore = 0;
 
 const popCorn = document.getElementById("logoAnim")
 const animScreen= document.getElementById("animScreen")
 const btnSkip= document.querySelector(".btnSkip")
 
+const resultado = document.getElementById("resultado")
+
+const peliElegida = elegirPelicula();
+
+
 let peliculaData = [];
-let   duracion = 5000;
+let   duracion = 60000;
 const apikey = "3020f1e3";
-
-
 
 let ronda = 0;
 let errorCout =0;
 
-function fetchPelicula() {
-  const peliElegida = elegirPelicula();
+let timerTimeout;
+let pista1Timeout;
+let pista2Timeout;
+let pista3Timeout;
 
+
+function fetchPelicula() {
+  
   if (!peliElegida) {
     alert("No quedan más películas.");
     return;
@@ -39,6 +51,7 @@ function fetchPelicula() {
       peliculaData = data;
       mostrarPortada(peliculaData);
       crearPistas(peliculaData);
+      
     });
 }
 
@@ -57,8 +70,8 @@ function iniciarTimer() {
   }, duracion);
 }
 
+
 function crearPistas (pista){
-  
   let tempGenero = pista.Genre;
   let tempTipo = pista.Type;
   let tempDesc = pista.Plot;
@@ -74,17 +87,34 @@ function crearPistas (pista){
   pista1Timeout = setTimeout(() => {
     
     genre.textContent = traducirGenero(tempGenero);
+    score=score - 20
+    actPuntos(score)
   }, duracion * 0.40);
 
   pista2Timeout = setTimeout(() => {
 
     type.textContent = traducirTipo(tempTipo);
+    score=score - 20
+    actPuntos(score)
   }, duracion * 0.60);
 
   pista3Timeout = setTimeout(() => {
     desc.textContent = tempDesc;
     cambiarReloj();
+    mostrarSkip()
+    score=score - 35
+    actPuntos(score)
   }, duracion * 0.80);
+  
+}
+
+
+function mostrarSkip (){
+  btnSkip.style.visibility="visible"
+  btnSkip.addEventListener('click', function(){
+    
+  })
+
 }
 
 function traducirTipo(pista){
@@ -134,26 +164,33 @@ function elegirPelicula() {
   return posicionElegida;
 }
 
-let timerTimeout;
-
-let pista1Timeout;
-let pista2Timeout;
-let pista3Timeout;
-
 async function siguientePelicula() {
-
   inputPeli.value = "";
-
+  actPuntosTotales()
   await animTransicion();
   await animacionCompl();
-  
   fetchPelicula();
   iniciarTimer();
 }
 
+
+function actPuntos(puntos){
+  contPuntos.innerHTML="Puntos: "+puntos
+}
+
+function actPuntosTotales(){
+  totalScore=totalScore + score
+  score=100
+
+}
+
 function verificarRespuesta() {
-  const respuestaUsuario = inputPeli.value.trim().toLowerCase();
-  const respuestaCorrecta = peliculaData.Title.toLowerCase();
+  const respuestaUsuario = inputPeli.value.toLowerCase();
+  const respuestaCorrecta = peliElegida.toLowerCase();
+  if(respuestaUsuario===respuestaCorrecta){
+    console.log("Pelicula correcta")
+    siguientePelicula()
+  }
 }
 
 btnPeli.addEventListener("click", verificarRespuesta);
@@ -163,6 +200,10 @@ inputPeli.addEventListener("keypress", function(e) {
     verificarRespuesta();
   }
 });
+
+function mostrarPuntajeTotal(){
+  window.location.href="../PAGES/BienHecho01"
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   siguientePelicula();
@@ -183,6 +224,7 @@ function esperarSkip(btn) {
 
 
 async function animTransicion() {
+  btnSkip.style.visibility="collapse"
   popCorn.classList.remove('salida-logoAnim');
   animScreen.classList.remove("salida-fondo")
   popCorn.src="../img/popframe.gif"
@@ -190,18 +232,21 @@ async function animTransicion() {
   animScreen.classList.add("entrada-fondo")
   popCorn.classList.add('entrada-logoAnim');
   await esperarAnimacion(popCorn);
+  imgReloj.style.animation="animReloj 1.2s infinite ease-in-out"
+  imgReloj.src="../IMG/Reloj.png"
 }
 
 async function animacionCompl() {
-  
   popCorn.src="../img/1f37f-test reverse.gif?v=0";
   popCorn.classList.remove('entrada-logoAnim'); 
   animScreen.classList.remove("entrada-fondo")
   popCorn.classList.add('salida-logoAnim'); 
   await esperarAnimacion(popCorn);
   animScreen.classList.add("salida-fondo")
+
 }
 
 function cambiarReloj(){
   imgReloj.src="../IMG/RelojExclamacion.png";
+  imgReloj.style.animation="clock-shake 0.15s infinite linear"
 }
