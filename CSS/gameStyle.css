@@ -255,3 +255,24 @@ body {
     50% {transform: scale(1.15);}
     100% {transform: scale(1);}
 }
+
+#TitPeli{
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+}
+#InputPeli{
+    background-color: white;
+    border: 5px solid #ff9e00;
+    border-radius: 10px;
+    padding: 5%;
+    width: 30vw;
+}
+#BtnPeli{
+    color: #ffffff;
+    font-weight: bolder;
+    background-color:#ff9e00;
+    border-style: none;
+    border-radius: 10px;
+    padding: 6%;
+}
