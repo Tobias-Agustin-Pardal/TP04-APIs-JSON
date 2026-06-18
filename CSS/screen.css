@@ -1,0 +1,38 @@
+.Screen{
+    visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: rgb(0 0 0 / 90%); 
+    padding: 9vh;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
+.Screen h2{
+    font-size: 5vh;
+    font-weight: bold;
+}
+.Screen p{
+    font-size: 2.5vh;
+}
+.Screen img{
+    height: 15vh;
+}
+.Screen #Flecha{
+    height: 10vh;
+}
+.Screen div{
+    display: flex;
+    flex-direction: row;
+}
