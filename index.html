@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./CSS/navbar.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./CSS/screen.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +29,27 @@
         </nav>
     </header>
     <main>
+        <div class="Screen" id="Screen01">
+            <h2>COMO JUGAR</h2>
+            <p>En pantalla verás la portada de una PELÍCULA o SERIE. <br> Tu objetivo es adivinarla con ayuda de TRES PISTAS de diferentes tipos...</p>
+            <div>
+                <img class="Botones" src="./IMG/CintaColor.png" alt="">
+                <img class="Botones" src="./IMG/AccionColor.png" alt="">
+                <img class="Botones" src="./IMG/LentesColor.png" alt="">
+            </div>
+            
+            <button id="Siguiente">Siguiente</button>
+        </div>
+        <div class="Screen" id="Screen02">
+            <h2>COMO JUGAR</h2>
+            <p>¡PERO CUIDADO!:  el tiempo es limitado - mientras más tardes, más puntos perderas.<br>Una vez pasado el tiempo de cada pista, no podrás volverla a ver.</p>
+            <div>
+                <img id="RelojExclamacion" src="./IMG/RelojExclamacion.png" alt="">
+                <img id="Flecha" src="./IMG/edited-photo.png" alt="">
+                <img id="Cinta" src="./IMG/CintaOjo.png" alt="">
+            </div>
+            <button><a href="./PAGES/gamePage.html">JUGAR</a></button>
+        </div>
         <div>
             <span class="title-cont"><span>Pop</span>Culture</span>
             <div id="Texto">Adivina la película o serie según las tres instancias de juego</div>
@@ -37,13 +59,10 @@
                 <img class="Botones" src="./IMG/LentesColor.png" alt="">
             </div>
             <div>
-                <button id="JUGAR"><a href="./PAGES/gamePage.html">JUGAR</a></button>
+                <button id="JUGAR">Siguiente</button>
             </div>
         </div>
     </main>
-    <footer>
-        <img src="" alt="">
-        <p></p>
-    </footer>
+    <script src="./JS/index.js"></script>
 </body>
 </html>
