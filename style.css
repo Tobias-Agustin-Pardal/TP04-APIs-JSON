@@ -52,9 +52,17 @@ main button{
     border-color: #ff9e00;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
+    font-size: 3vh;
     color: #ffffff;
-    padding: 30px 50px 30px 50px;
-    border-radius: 10%;
+    width: 10vw;
+    height: 10vh;
+    border-radius: 1vh;
+    transition: all 0.4s;
+    
+}
+
+main button:hover{
+    transform: scale(1.1);
 }
 a{
     color: inherit;

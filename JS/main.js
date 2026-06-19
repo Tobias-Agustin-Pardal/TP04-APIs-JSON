@@ -1,8 +1,6 @@
 
-const portada = document.getElementById("portada");
+const portadaIMG = document.getElementById("portadaIMG");
 const timerBar = document.getElementById('temp');
-const inputPeli = document.getElementById("inputPeli");
-const btnPeli = document.getElementById("BtnPeli");
 const salida = document.getElementById("Exit");
 const imgReloj = document.getElementById("reloj");
 
@@ -22,10 +20,15 @@ const btnSkip= document.querySelector(".btnSkip")
 
 const resultado = document.getElementById("resultado")
 
+const pixel = document.querySelector(".pixel")
+
+const blackscreen = document.getElementById("blackscreen")
+
+
 let peliElegida;
 
 let peliculaData = [];
-let   duracion = 60000;
+let   duracion = 10000;
 const apikey = "3020f1e3";
 
 let ronda = 0;
@@ -36,38 +39,163 @@ let pista1Timeout;
 let pista2Timeout;
 let pista3Timeout;
 
+let inputs;
+
+let palabraActual;
+
 
 function fetchPelicula() {
   peliElegida = elegirPelicula();
-  
+  palabraActual = peliElegida;
+  dibujarTitulo(palabraActual);
   if (!peliElegida) {
     alert("No quedan más películas.");
     return;
   }
-
   fetch(`https://www.omdbapi.com/?apikey=${apikey}&t=${peliElegida}`)
     .then(response => response.json())
     .then(data => {
       peliculaData = data;
-      mostrarPortada(peliculaData);
+      mostrarportadaIMG(peliculaData);
       crearPistas(peliculaData);
-      
     });
 }
 
-function iniciarTimer() {
+// CREACION DE SLOTS PARA LETRAS DE PALABRA
+function dibujarTitulo(palabra){
+
+  const contenedor = document.querySelector(".wordle-row");
+  contenedor.innerHTML = "";
+
+  for(const caracter of palabra){
+    if(caracter === " "){
+
+      const espacio = document.createElement("div");
+      espacio.classList.add("espacio");
+
+      contenedor.appendChild(espacio);
+
+    }else{
+      const input = document.createElement("input");
+      input.type = "text";
+      input.maxLength = 1;
+      contenedor.appendChild(input);
+      input.style.animation="aparecerCajas 0.5s ease-in-out"
+    }
+  }
+
+  inputs = document.querySelectorAll(".wordle-row input");
+
+  function comprobarPalabra(){
+    const palabraIngresada = Array.from(inputs)
+      .map(input => input.value)
+      .join("")
+      .toUpperCase();
+
+    const palabraCorrecta = palabra
+      .replaceAll(" ", "")
+      .toUpperCase();
+
+    if(palabraIngresada === palabraCorrecta){
+      console.log("¡Correcto!");
+
+
+      inputs.forEach(input => {
+        input.classList.remove("vacio");
+        input.classList.add("correcta");
+      });
+    }
+    else{
+      console.log("Incorrecto");
+
+      inputs.forEach((input) => {
+        input.classList.remove("vacio");
+        input.classList.add("incorrecta");
+
+      });
+      
+    }
+
+  }
+
+  inputs.forEach((input, index) => {
+
+    input.addEventListener("input", () => {
+
+      input.value = input.value.toUpperCase();
+
+      const vacias = Array.from(inputs)
+        .filter(i => i.value === "").length;
+
+      if(vacias > 0){
+
+        inputs.forEach(i => {
+          i.classList.remove("incorrecta");
+          i.classList.remove("correcta");
+          i.classList.add("vacio");
+        });
+
+      }
+      
+      if(input.value && index < inputs.length - 1){
+        inputs[index + 1].focus();
+      }
+
+      // Comprobar cuando todas las casillas estén llenas
+      if(Array.from(inputs).every(i => i.value !== "")){
+        comprobarPalabra();
+      }
+    });
+
+    input.addEventListener("keydown", (e) => {
+
+      if(e.key === "Backspace" && !input.value && index > 0){
+        inputs[index - 1].focus();
+      }
+
+    });
+
+  });
+
+  if(inputs.length > 0){
+    inputs[0].focus();
+  }
+}
+//CREACION DE SLOTS PARA LETRAS DE PALABRA (fin)
+
+// REVELO LA PELICULA ( REMPLAZO LOS INPUTS.VALUE POR LA LETRA QUE CORRESPONDE SEGUN "palabraCorrecta")
+function revelarPelicula(palabra) {
+    pixel.style.visibility="collapse";
+    portadaIMG.style.filter="blur(0px)"
+    iniciarTimer(5000);
+    const palabraCorrecta = palabra
+      .replaceAll(" ", "")
+      .toUpperCase();
+    inputs.forEach((input, index) => {
+      setTimeout(() => {
+        input.value = palabraCorrecta[index] || "";
+
+        input.classList.remove("vacio", "incorrecta");
+        input.classList.add("correcta");
+      }, index * 100);
+    });
+    setTimeout(() => {
+      siguientePelicula();
+    }, 5000);
+  }
+
+
+function iniciarTimer(tiempo) {
 
   timerBar.style.animation = 'none';
   timerBar.offsetHeight;
 
-  timerBar.style.animation =
-    `crecer ${duracion}ms linear forwards`;
-
-  clearTimeout(timerTimeout);
+  timerBar.style.animation =`crecer ${tiempo}ms linear forwards`;
+  clearTimeout(tiempo);
 
   timerTimeout = setTimeout(() => {
     tiempoAgotado();
-  }, duracion);
+  }, tiempo);
 }
 
 
@@ -76,6 +204,12 @@ function crearPistas (pista){
   let tempGenero = pista.Genre;
   let tempTipo = pista.Type;
   let tempDesc = pista.Plot;
+  genre.classList.remove("PistaAbierto")
+  genre.classList.add("PistaCerrado")
+  type.classList.remove("PistaAbierto")
+  type.classList.add("PistaCerrado")
+  desc.classList.remove("PistaAbierto")
+  desc.classList.add("PistaCerrado")
 
   genre.textContent = "";
   type.textContent = "";
@@ -88,6 +222,9 @@ function crearPistas (pista){
   pista1Timeout = setTimeout(() => {
     
     genre.textContent = traducirGenero(tempGenero);
+    genre.classList.add("PistaAbierto")
+    genre.classList.remove("PistaCerrado")
+    
     score=score - 20
     actPuntos(score)
   }, duracion * 0.40);
@@ -95,27 +232,30 @@ function crearPistas (pista){
   pista2Timeout = setTimeout(() => {
 
     type.textContent = traducirTipo(tempTipo);
+    type.classList.add("PistaAbierto")
+    type.classList.remove("PistaCerrado")
     score=score - 20
     actPuntos(score)
   }, duracion * 0.60);
 
   pista3Timeout = setTimeout(() => {
     desc.textContent = traducirDesc(peliElegida,descripciones);
+    desc.classList.add("PistaAbierto")
+    desc.classList.remove("PistaCerrado")
     cambiarReloj();
-    mostrarSkip()
     score=score - 35
     actPuntos(score)
+    
   }, duracion * 0.80);
   
 }
 
 
 function mostrarSkip (){
-  btnSkip.style.visibility="visible"
+  btnSkip.style.visibility="visible";
   btnSkip.addEventListener('click', function(){
-    
+    revelarPelicula(peliElegida);
   })
-
 }
 
 //-------------- TRADUCCIONES ---------------
@@ -161,8 +301,8 @@ function tiempoAgotado() {
   siguientePelicula();
 }
 
-function mostrarPortada(info) {
-    portada.style.backgroundImage = `url(${info.Poster})`;
+function mostrarportadaIMG(info) {
+    portadaIMG.src = info.Poster;
 }
 
 function elegirPelicula() {
@@ -176,13 +316,16 @@ function elegirPelicula() {
 }
 
 async function siguientePelicula() {
-  
-  inputPeli.value = "";
+  pixel.style.visibility="visible";
+  portadaIMG.style.filter="blur(8px)"
+  btnSkip.classList.add="visible"
   actPuntosTotales()
   await animTransicion();
   await animacionCompl();
   fetchPelicula();
-  iniciarTimer();
+  iniciarTimer(duracion);
+  mostrarSkip()
+  
 }
 
 
@@ -197,22 +340,12 @@ function actPuntosTotales(){
 }
 
 function verificarRespuesta() {
-  const respuestaUsuario = inputPeli.value.toLowerCase();
   const respuestaCorrecta = peliElegida.toLowerCase();
   if(respuestaUsuario===respuestaCorrecta){
     console.log("Pelicula correcta")
     siguientePelicula()
   }
 }
-
-btnPeli.addEventListener("click", verificarRespuesta);
-
-inputPeli.addEventListener("keypress", function(e) {
-  if (e.key === 'Enter') {
-    verificarRespuesta();
-  }
-});
-
 function mostrarPuntajeTotal(){
   window.location.href="../PAGES/BienHecho01"
 }
@@ -237,7 +370,7 @@ function esperarSkip(btn) {
 
 
 async function animTransicion() {
-  btnSkip.style.visibility="collapse"
+  blackscreen.style.visibility="visible"
   popCorn.classList.remove('salida-logoAnim');
   animScreen.classList.remove("salida-fondo")
   popCorn.src="../img/popframe.gif"
@@ -250,6 +383,7 @@ async function animTransicion() {
 }
 
 async function animacionCompl() {
+  blackscreen.style.visibility="collapse"
   popCorn.src="../img/1f37f-test reverse.gif?v=0";
   popCorn.classList.remove('entrada-logoAnim'); 
   animScreen.classList.remove("entrada-fondo")
@@ -263,3 +397,20 @@ function cambiarReloj(){
   imgReloj.src="../IMG/RelojExclamacion.png";
   imgReloj.style.animation="clock-shake 0.15s infinite linear"
 }
+
+
+/*
+    box.style.animation = "entrarBox 0.8s ease-out forwards";
+
+    if (config.anim) {
+        setTimeout(() => {
+            span.style.animation = `${config.anim} 0.8s ease-in-out infinite`;
+        }, 300);
+    }
+    
+ 
+    setTimeout(() => {
+        box.style.animation = "salirBox 0.8s ease-in forwards";
+        setTimeout(() => box.remove(), 800);
+    }, duration);
+*/

@@ -26,6 +26,7 @@
         </nav>
     </header>
    <main> 
+    <div id="blackscreen"></div>
         <div id="animScreen">
             <div class="color1"></div>
             <div class="color2"></div>
@@ -35,30 +36,36 @@
         </div>
         <div class="contSup">
             <div class="left">
-                <div id="portada"></div>
-                <div class="pixel"></div>
+                <div id="contPortada">
+                    <img src="" alt="" id="portadaIMG">
+                    <div class="pixel"></div>
+                </div>
             </div>
             <div class="right">
-                <div class="contPista"><img src="../IMG/CintaGris.png" alt="Cinta Gris" class="pista pista1"><span id="genere"></span></div>
-                
-                <div class="contPista"><img src="../IMG/AccionGris.png" alt="Cinta Gris" class="pista pista2"><span id="type"></span></div>
-                <div class="contPista"><img src="../IMG/LentesGris.png" alt="Cinta Gris" class="pista pista3"><span id="desc"></span></div>
-                <div id="contTiempo">
-                    <div class="contPista tiempo"><div class="contTemp"><div id="temp" ></div></div></div>
-                    <div><img id="reloj" src="../IMG/Reloj.png" alt=""></div>
+                <div class="contenedores div1">
+                    <img src="../IMG/AccionGris.png" alt="">
+                    <div class="contPista">
+                        <span id="genere"></span>
+                    </div>
                 </div>
+                <div class="contenedores div2"><div class="contPista"></div><span id="type"></span></div>
+                <div class="contenedores div3"><div class="contPista"></div><span id="desc"></span></div>
+                <div class="div4">
+                    <div id="contTiempo">
+                        <div class="contTemp"><div id="temp" ></div></div>
+                        <div><img id="reloj" src="../IMG/Reloj.png" alt=""></div>
+                    </div>
+                </div>
+                
+                
+                
+                
                 <span class="puntos">100</span>
             </div>
-            
-            
         </div>
 
-        <div class="contInf">
-           
-            <div id="TitPeli">
-                <input id="inputPeli" type="text">
-                <button id="BtnPeli">¡Responder!</button>
-            </div>
+        <div class="contInf"> 
+            <div class="wordle-row"></div>
         </div>
     </main>
     <footer>
