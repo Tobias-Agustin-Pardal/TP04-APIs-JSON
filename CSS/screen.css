@@ -1,11 +1,11 @@
 .Screen{
-    visibility: hidden;
+    visibility: collapse;
     position: fixed;
-    top: 50%;
+    transform: translate(-50%);
     left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 9999;
     background-color: rgb(0 0 0 / 90%); 
+    backdrop-filter: blur(10px);
     padding: 9vh;
     width: fit-content;
     height: fit-content;
@@ -35,4 +35,35 @@
 .Screen div{
     display: flex;
     flex-direction: row;
+}
+
+.mostrarTuto{
+   
+    visibility: visible;
+    animation: aparecerTutorial 0.5s ease-in;
+}
+.ocultarTuto{
+    animation: ocultarTutorial 0.5s ease-in;
+    visibility: visible;
+
+}
+
+@keyframes aparecerTutorial{
+    from{
+        transform: scale(0) ;
+    }
+    
+    to{
+        transform: scale(1) translate(-50%);
+    }
+}
+
+@keyframes ocultarTutorial{
+    from{
+        transform: scale(1) translate(-50%);
+    }
+    
+    to{
+        transform: scale(0) ;
+    }
 }
