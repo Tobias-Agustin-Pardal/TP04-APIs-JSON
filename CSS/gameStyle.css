@@ -100,43 +100,60 @@ body {
 .right > .div3 { grid-area: 3 / 1 / 4 / 2; }
 .right > .div4 { grid-area: 4 / 1 / 5 / 2; } 
 
-.right > .contenedores{
+
+
+.right > .div1 , .div2 , .div3{
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: start;
 }
 
-.contenedores img{
-    width: auto;
-    height: auto;
-    height: 8vh;
-    width: auto;
-    box-sizing: content-box;
-}
-
-.contenedores > .contPistas{
+.contLogito{
     z-index: 2;
-    width: fit-content;
-    height: fit-content;
     border-radius: 50%;
     background-color: var(--color6);
     padding: 0.5vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.right > .contenedores span{
-    align-items: center;
-    background-color: var(--color6);
-    height: 50%;
-    font-size: 3vh;
-    position: relative;
-    left: -3vw;
+.contLogito img{
+    height: 10vh;
+    width: auto;
+}
+
+.contTexto{
     z-index: 1;
-    border-radius: 1vh;
+    background-color: var(--color6);
+    margin-left: -3vh;
+    padding: 1vh 3vh 1vh 4vh;
+    border-radius: 0 1vh 1vh 0;
+    clip-path: inset(0 100% 0 0);
+}
+
+.contTexto span{
+    font-size: 3vh;
     font-family: 'Open Sans', sans-serif;
-    color:var(--color5);
+    color: var(--color5);
     font-weight: bold;
 }
+
+.contTexto > #desc{
+    font-size: 1.5vh;
+}
+
+@keyframes entrarBox {
+  from { clip-path: inset(0 100% 0 0);opacity: 0; }
+  to { clip-path: inset(0 0 0 0);opacity: 1; }
+}
+
+@keyframes salirBox {
+    from { clip-path: inset(0 0 0 0); opacity: 1;}
+    to { clip-path: inset(0 100% 0 0);opacity: 0; }
+
+}
+
 
 #temp{
     transform-origin: left;
@@ -365,14 +382,3 @@ body {
   width: 1vw;
 }
 
-
-@keyframes entrarBox {
-  from { clip-path: inset(0 0 0 100%);opacity: 0; }
-  to { clip-path: inset(0 0 0 0);opacity: 1; }
-}
-
-@keyframes salirBox {
-    from { clip-path: inset(0 0 0 0); opacity: 1;}
-    to { clip-path: inset(0 0 0 100%);opacity: 0; }
-
-}
