@@ -7,6 +7,9 @@ const imgReloj = document.getElementById("reloj");
 const contPuntos = document.querySelector(".puntos")
 
 const genre = document.getElementById("genere");
+const boxA = document.querySelector(".boxA")
+const boxB = document.querySelector(".boxB")
+const boxC = document.querySelector(".boxC")
 const type = document.getElementById("type");
 const desc = document.getElementById("desc");
 
@@ -24,11 +27,17 @@ const pixel = document.querySelector(".pixel")
 
 const blackscreen = document.getElementById("blackscreen")
 
+const imgGene = document.getElementById("imgGene")
+const imgTipo = document.getElementById("imgTipo")
+const imgDesc = document.getElementById("imgDesc")
+
+let rondaFinalizada = false
+
 
 let peliElegida;
 
 let peliculaData = [];
-let   duracion = 10000;
+let   duracion = 15000;
 const apikey = "3020f1e3";
 
 let ronda = 0;
@@ -38,6 +47,7 @@ let timerTimeout;
 let pista1Timeout;
 let pista2Timeout;
 let pista3Timeout;
+let siguienteTimeout;
 
 let inputs;
 
@@ -98,12 +108,11 @@ function dibujarTitulo(palabra){
 
     if(palabraIngresada === palabraCorrecta){
       console.log("¡Correcto!");
-
-
       inputs.forEach(input => {
         input.classList.remove("vacio");
         input.classList.add("correcta");
       });
+      finalizarRonda()
     }
     else{
       console.log("Incorrecto");
@@ -165,51 +174,42 @@ function dibujarTitulo(palabra){
 
 // REVELO LA PELICULA ( REMPLAZO LOS INPUTS.VALUE POR LA LETRA QUE CORRESPONDE SEGUN "palabraCorrecta")
 function revelarPelicula(palabra) {
-    pixel.style.visibility="collapse";
-    portadaIMG.style.filter="blur(0px)"
-    iniciarTimer(5000);
-    const palabraCorrecta = palabra
-      .replaceAll(" ", "")
-      .toUpperCase();
-    inputs.forEach((input, index) => {
-      setTimeout(() => {
-        input.value = palabraCorrecta[index] || "";
+  pixel.style.visibility = "collapse";
+  portadaIMG.style.filter = "blur(0px)";
 
-        input.classList.remove("vacio", "incorrecta");
-        input.classList.add("correcta");
-      }, index * 100);
-    });
+  const palabraCorrecta = palabra
+    .replaceAll(" ", "")
+    .toUpperCase();
+
+  inputs.forEach((input, index) => {
     setTimeout(() => {
-      siguientePelicula();
-    }, 5000);
-  }
-
-
-function iniciarTimer(tiempo) {
-
-  timerBar.style.animation = 'none';
-  timerBar.offsetHeight;
-
-  timerBar.style.animation =`crecer ${tiempo}ms linear forwards`;
-  clearTimeout(tiempo);
-
-  timerTimeout = setTimeout(() => {
-    tiempoAgotado();
-  }, tiempo);
+      input.value = palabraCorrecta[index] || "";
+      input.classList.remove("vacio", "incorrecta");
+      input.classList.add("correcta");
+    }, index * 100);
+  });
 }
 
+function iniciarTimer(tiempo) {
+  clearTimeout(timerTimeout);
+
+  timerBar.style.animation = "none";
+  timerBar.offsetHeight;
+
+  timerBar.style.animation = `crecer ${tiempo}ms linear forwards`;
+
+  timerTimeout = setTimeout(() => {
+    boxC.style.animation = "salirBox 0.8s ease-out forwards";
+    imgDesc.src="../IMG/LentesGris.png"
+    finalizarRonda()
+  }, tiempo);
+}
 
 function crearPistas (pista){
   actPuntos(score)
   let tempGenero = pista.Genre;
   let tempTipo = pista.Type;
   let tempDesc = pista.Plot;
-  genre.classList.remove("PistaAbierto")
-  genre.classList.add("PistaCerrado")
-  type.classList.remove("PistaAbierto")
-  type.classList.add("PistaCerrado")
-  desc.classList.remove("PistaAbierto")
-  desc.classList.add("PistaCerrado")
 
   genre.textContent = "";
   type.textContent = "";
@@ -222,8 +222,8 @@ function crearPistas (pista){
   pista1Timeout = setTimeout(() => {
     
     genre.textContent = traducirGenero(tempGenero);
-    genre.classList.add("PistaAbierto")
-    genre.classList.remove("PistaCerrado")
+    boxA.style.animation = "entrarBox 0.8s ease-out forwards";
+    imgGene.src="../IMG/AccionColor.png"
     
     score=score - 20
     actPuntos(score)
@@ -232,30 +232,42 @@ function crearPistas (pista){
   pista2Timeout = setTimeout(() => {
 
     type.textContent = traducirTipo(tempTipo);
-    type.classList.add("PistaAbierto")
-    type.classList.remove("PistaCerrado")
+    boxA.style.animation = "salirBox 0.8s ease-out forwards";
+    imgGene.src="../IMG/AccionGris.png"
+    boxB.style.animation = "entrarBox 0.8s ease-out forwards";
+    imgTipo.src="../IMG/CintaColor.png"
     score=score - 20
     actPuntos(score)
   }, duracion * 0.60);
 
   pista3Timeout = setTimeout(() => {
     desc.textContent = traducirDesc(peliElegida,descripciones);
-    desc.classList.add("PistaAbierto")
-    desc.classList.remove("PistaCerrado")
+    boxB.style.animation = "salirBox 0.8s ease-out forwards";
+    imgTipo.src="../IMG/CintaOjo.png"
+    boxC.style.animation = "entrarBox 0.8s ease-out forwards";
+    imgDesc.src="../IMG/LentesColor.png"
+    
     cambiarReloj();
     score=score - 35
     actPuntos(score)
     
   }, duracion * 0.80);
+
   
 }
 
+function limpiarTimers(){
+  clearTimeout(timerTimeout);
+  clearTimeout(pista1Timeout);
+  clearTimeout(pista2Timeout);
+  clearTimeout(pista3Timeout);
+  clearTimeout(siguienteTimeout);
+}
 
-function mostrarSkip (){
-  btnSkip.style.visibility="visible";
-  btnSkip.addEventListener('click', function(){
-    revelarPelicula(peliElegida);
-  })
+
+function mostrarSkip() {
+  btnSkip.style.visibility = "visible";
+  btnSkip.onclick = () => finalizarRonda();
 }
 
 //-------------- TRADUCCIONES ---------------
@@ -296,9 +308,20 @@ function traducirGenero(pista){
 
 //-------------- TRADUCCIONES ---------------
 
+function finalizarRonda() {
+  if (rondaFinalizada) return;
+
+  rondaFinalizada = true;
+  limpiarTimers();
+  revelarPelicula(peliElegida);
+  siguienteTimeout = setTimeout(() => {
+    siguientePelicula();
+  }, 5000);
+}
 
 function tiempoAgotado() {
-  siguientePelicula();
+  score=0
+  finalizarRonda()
 }
 
 function mostrarportadaIMG(info) {
@@ -316,18 +339,16 @@ function elegirPelicula() {
 }
 
 async function siguientePelicula() {
-  pixel.style.visibility="visible";
-  portadaIMG.style.filter="blur(8px)"
-  btnSkip.classList.add="visible"
-  actPuntosTotales()
+  rondaFinalizada = false;
+  pixel.style.visibility = "visible";
+  portadaIMG.style.filter = "blur(8px)";
+  actPuntosTotales();
   await animTransicion();
   await animacionCompl();
   fetchPelicula();
   iniciarTimer(duracion);
-  mostrarSkip()
-  
+  mostrarSkip();
 }
-
 
 function actPuntos(puntos){
   contPuntos.innerHTML="Puntos: "+puntos
@@ -335,7 +356,7 @@ function actPuntos(puntos){
 
 function actPuntosTotales(){
   totalScore=totalScore + score
-  score=100
+  console.log(totalScore)
 
 }
 
@@ -362,13 +383,6 @@ function esperarAnimacion(elemento) {
   });
 }
 
-function esperarSkip(btn) {
-  return new Promise(resolve => {
-    btn.addEventListener("click", resolve, { once: true });
-  });
-}
-
-
 async function animTransicion() {
   blackscreen.style.visibility="visible"
   popCorn.classList.remove('salida-logoAnim');
@@ -377,9 +391,12 @@ async function animTransicion() {
   animScreen.style.visibility = "visible";
   animScreen.classList.add("entrada-fondo")
   popCorn.classList.add('entrada-logoAnim');
-  await esperarAnimacion(popCorn);
   imgReloj.style.animation="animReloj 1.2s infinite ease-in-out"
   imgReloj.src="../IMG/Reloj.png"
+  imgGene.src="../IMG/AccionOjo.png"
+  imgTipo.src="../IMG/CintaGris.png"
+  imgDesc.src="../IMG/LentesGris.png"
+  await esperarAnimacion(popCorn);
 }
 
 async function animacionCompl() {
@@ -397,20 +414,3 @@ function cambiarReloj(){
   imgReloj.src="../IMG/RelojExclamacion.png";
   imgReloj.style.animation="clock-shake 0.15s infinite linear"
 }
-
-
-/*
-    box.style.animation = "entrarBox 0.8s ease-out forwards";
-
-    if (config.anim) {
-        setTimeout(() => {
-            span.style.animation = `${config.anim} 0.8s ease-in-out infinite`;
-        }, 300);
-    }
-    
- 
-    setTimeout(() => {
-        box.style.animation = "salirBox 0.8s ease-in forwards";
-        setTimeout(() => box.remove(), 800);
-    }, duration);
-*/
