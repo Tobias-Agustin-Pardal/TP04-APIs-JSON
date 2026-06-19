@@ -10,9 +10,10 @@ btnSiguiente.addEventListener('click',()=>{
     CambiarScreen()
 })
 function MostrarScreen(){
-    screen01.style.visibility="visible";
+    screen01.classList.add("mostrarTuto")
 }
 function CambiarScreen(){
-    screen01.style.visibility="hidden";
-    screen02.style.visibility="visible";
+    screen01.classList.remove("mostrarTuto")
+    screen01.classList.add("ocultarTuto")
+    screen02.classList.add("mostrarTuto")
 }
