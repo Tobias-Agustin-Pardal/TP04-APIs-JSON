@@ -45,7 +45,7 @@ const listaPeliculas = [
   "Doctor Strange",
   "Spider-Man",
   "Re Zero",
-  "Wolverine",
+  "Logan",
   "Deadpool",
   "Teletubbies",
   "The Conjuring",
@@ -70,7 +70,7 @@ const listaPeliculas = [
   "Power Rangers",
   "Scarface",
   "Heat",
-  "A Quiiet Place"
+  "A Quiet Place"
 ];
 
 const diccionario = {
