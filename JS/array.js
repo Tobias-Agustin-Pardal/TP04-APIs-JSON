@@ -167,7 +167,7 @@ const descripciones = {
   "Midsommar" : "Una pareja viaja a Escandinavia para visitar el festival de verano de la ciudad natal de un amigo rural, solo para encontrarse en medio de una violenta y extraña competencia pagana.",
   "It" : "En el verano de 1989, un grupo de niños marginados se une para destruir a un monstruo que cambia de forma, que se disfraza de payaso y asesina a los niños de su pequeño pueblo en Maine.",
   "Scream" : "Un año después del asesinato de su madre, una joven estudiante de secundaria es aterrorizada por un nuevo asesino en serie que utiliza las películas de terror como parte de un juego mortal.",
-  "SCP-096" : "Cortometraje basado en el universo de la Fundación SCP, centrado en los eventos que rodean la contención del SCP-096, un humanoide alto y pálido que ataca agresivamente a cualquiera que vea su rostro.",
+  "096" : "Cortometraje basado en el universo de la Fundación SCP, centrado en los eventos que rodean la contención del SCP-096, un humanoide alto y pálido que ataca agresivamente a cualquiera que vea su rostro.",
   "Halloween" : "Quince años después de asesinar a su hermana en la noche de Halloween de 1963, Michael Myers escapa de un hospital psiquiátrico y regresa al pequeño pueblo de Haddonfield para volver a matar.",
   "The Exorcist" : "Cuando una joven es poseída por una entidad misteriosa, su madre busca la ayuda de dos sacerdotes católicos para salvar a su hija mediante un exorcismo.",
   "Saw" : "Dos hombres se despiertan atrapados en una habitación subterránea en descomposición, donde un asesino en serie conocido como Jigsaw les da órdenes e instrucciones a través de cintas de audio para jugar un juego mortal por sus vidas.",
