@@ -37,7 +37,7 @@ let rondaFinalizada = false
 let peliElegida;
 
 let peliculaData = [];
-let   duracion = 15000;
+let   duracion = 25000;
 const apikey = "3020f1e3";
 
 let ronda = 0;
@@ -227,7 +227,7 @@ function crearPistas (pista){
     
     score=score - 20
     actPuntos(score)
-  }, duracion * 0.40);
+  }, duracion * 0.15);
 
   pista2Timeout = setTimeout(() => {
 
@@ -238,7 +238,7 @@ function crearPistas (pista){
     imgTipo.src="../IMG/CintaColor.png"
     score=score - 20
     actPuntos(score)
-  }, duracion * 0.60);
+  }, duracion * 0.38);
 
   pista3Timeout = setTimeout(() => {
     desc.textContent = traducirDesc(peliElegida,descripciones);
@@ -251,7 +251,7 @@ function crearPistas (pista){
     score=score - 35
     actPuntos(score)
     
-  }, duracion * 0.80);
+  }, duracion * 0.55);
 
   
 }
