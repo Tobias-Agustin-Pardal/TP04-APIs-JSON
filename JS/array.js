@@ -96,7 +96,9 @@ const listaPeliculas = [
   "The Boys",
   "Up",
   "Coco",
-  "Cars"
+  "Cars",
+  "Okupas",
+  "El Marginal",
 ];
 
 const diccionario = {
@@ -234,5 +236,7 @@ const descripciones = {
   "Up" : "Un anciano cumple el sueño de viajar a Sudamérica elevando su casa con miles de globos y viviendo una aventura inesperada.",
   "Coco" : "Un joven apasionado por la música viaja al mundo de los muertos para descubrir la verdad sobre su familia.",
   "Cars" : "Un famoso auto de carreras aprende el valor de la amistad y la humildad tras quedar varado en un pequeño pueblo.",
+  "Okupas" : "Cuatro jóvenes de distintos orígenes comparten una casa tomada en Buenos Aires mientras enfrentan la amistad, la violencia y las dificultades de la vida urbana.",
+  "El Marginal" : "Un expolicía ingresa a una peligrosa prisión con una identidad falsa para investigar un secuestro, quedando atrapado en un mundo dominado por el crimen y la corrupción.",
   "A Quiet Place" : "En un mundo postapocalíptico, una familia se ve obligada a vivir en total silencio mientras se esconde de monstruos ciegos que poseen un sentido del oído ultra sensible."
 }
