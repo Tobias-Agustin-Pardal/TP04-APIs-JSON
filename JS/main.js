@@ -3,6 +3,7 @@ const timerBar = document.getElementById('temp');
 const salida = document.getElementById("Exit");
 const imgReloj = document.getElementById("reloj");
 
+
 const contPuntos = document.querySelector(".puntos")
 
 const genre = document.getElementById("genere");
@@ -175,6 +176,8 @@ function dibujarTitulo(palabra){
 function revelarPelicula(palabra) {
   pixel.style.visibility = "collapse";
   portadaIMG.style.filter = "blur(0px)";
+  imgReloj.style.animation="salir-reloj 1.2s forwards"
+  timerBar.style.animation = `crecer 3ms linear forwards`;
 
   const palabraCorrecta = palabra
     .replaceAll(" ", "")
@@ -185,18 +188,16 @@ function revelarPelicula(palabra) {
       input.value = palabraCorrecta[index] || "";
       input.classList.remove("vacio", "incorrecta");
       input.classList.add("correcta");
+      input.readOnly=true;
     }, index * 100);
   });
 }
 
 function iniciarTimer(tiempo) {
-  clearTimeout(timerTimeout);
-
+  limpiarTimers()
   timerBar.style.animation = "none";
   timerBar.offsetHeight;
-
   timerBar.style.animation = `crecer ${tiempo}ms linear forwards`;
-
   timerTimeout = setTimeout(() => {
     boxC.style.animation = "salirBox 0.8s ease-out forwards";
     imgDesc.src="../IMG/LentesGris.png"
@@ -213,11 +214,6 @@ function crearPistas (pista){
   genre.textContent = "";
   type.textContent = "";
   desc.textContent = "";
-
-  clearTimeout(pista1Timeout);
-  clearTimeout(pista2Timeout);
-  clearTimeout(pista3Timeout);
-
   pista1Timeout = setTimeout(() => {
     
     genre.textContent = traducirGenero(tempGenero);
@@ -256,6 +252,8 @@ function crearPistas (pista){
 }
 
 function limpiarTimers(){
+
+
   clearTimeout(timerTimeout);
   clearTimeout(pista1Timeout);
   clearTimeout(pista2Timeout);
@@ -267,7 +265,10 @@ function limpiarTimers(){
 
 function mostrarSkip() {
   btnSkip.style.visibility = "visible";
-  btnSkip.onclick = () => finalizarRonda();
+  btnSkip.addEventListener('click',()=>{
+    score=0
+    finalizarRonda();
+  })
 }
 
 //-------------- TRADUCCIONES ---------------
