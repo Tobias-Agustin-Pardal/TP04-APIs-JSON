@@ -1,4 +1,3 @@
-
 *{
     padding: 0;
     margin: 0;
@@ -110,7 +109,7 @@ body {
 .contLogito{
     z-index: 2;
     border-radius: 50%;
-    background-color: var(--color6);
+    background-color: var(--color7);
     padding: 0.5vh;
 
     display: flex;
@@ -125,7 +124,7 @@ body {
 
 .contTexto{
     z-index: 1;
-    background-color: var(--color6);
+    background-color: var(--color7);
     margin-left: -3vh;
     padding: 1vh 3vh 1vh 4vh;
     border-radius: 0 1vh 1vh 0;
@@ -171,9 +170,11 @@ body {
     gap: 2vw;
 }
 #reloj{
+    transform-origin: center;
     margin: 0 auto;
     height: 10vh;
     animation: animReloj 1.2s infinite ease-in-out;
+    
 }
 
 .contTemp{
@@ -196,6 +197,12 @@ body {
 @keyframes crecer{
     to{
         transform: scaleX(1);
+    }
+}
+
+@keyframes achicar{
+    to{
+        transform: scaleX(0);
     }
 }
 
@@ -314,6 +321,13 @@ body {
     50% {transform: scale(1.15);}
     100% {transform: scale(1);}
 }
+@keyframes salir-reloj{
+    0% {transform: scale(1.15);}
+    25% {transform: scale(1);}
+    100% {transform: scale(0);}
+}
+
+
 
 
 @keyframes clock-shake {
@@ -381,4 +395,3 @@ body {
 .espacio{
   width: 1vw;
 }
-
