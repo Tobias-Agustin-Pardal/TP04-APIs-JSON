@@ -1,4 +1,3 @@
-
 const portadaIMG = document.getElementById("portadaIMG");
 const timerBar = document.getElementById('temp');
 const salida = document.getElementById("Exit");
@@ -37,7 +36,7 @@ let rondaFinalizada = false
 let peliElegida;
 
 let peliculaData = [];
-let   duracion = 25000;
+let   duracion = 30000;
 const apikey = "3020f1e3";
 
 let ronda = 0;
@@ -262,6 +261,7 @@ function limpiarTimers(){
   clearTimeout(pista2Timeout);
   clearTimeout(pista3Timeout);
   clearTimeout(siguienteTimeout);
+  
 }
 
 
@@ -314,6 +314,7 @@ function finalizarRonda() {
   rondaFinalizada = true;
   limpiarTimers();
   revelarPelicula(peliElegida);
+  actPuntosTotales();
   siguienteTimeout = setTimeout(() => {
     siguientePelicula();
   }, 5000);
@@ -342,7 +343,6 @@ async function siguientePelicula() {
   rondaFinalizada = false;
   pixel.style.visibility = "visible";
   portadaIMG.style.filter = "blur(8px)";
-  actPuntosTotales();
   await animTransicion();
   await animacionCompl();
   fetchPelicula();
@@ -384,6 +384,7 @@ function esperarAnimacion(elemento) {
 }
 
 async function animTransicion() {
+  score=100
   blackscreen.style.visibility="visible"
   popCorn.classList.remove('salida-logoAnim');
   animScreen.classList.remove("salida-fondo")
